@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+<h3 class="mb-4" style="font-weight:bold ;">delete
+    <a href='/contacts/'><span style="color:crimson ;">:◘:</span></a> contact  </h3> 
+{% endblock %}
+
+
+{% block left %}
+    <p style="font-weight:bold ;font-size:22px ; padding-top: 20px;">Deleting " {{ obj.name }} " . Are you sure ?</p>
+{% endblock %}
+
+{% block right %}
+<form method="POST">{% csrf_token %}
+    <button type="submit" class="btn btn-white btn-outline-white">yes , delete</button> <br><br>
+    <a href="/contacts/" class="btn btn-white btn-outline-white">no , back to home page</a>
+</form>
+{% endblock %}

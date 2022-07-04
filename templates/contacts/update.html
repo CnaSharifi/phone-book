@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h3 class="mb-4" style="font-weight:bold ;">edit
+    <a href='/contacts/'><span style="color:crimson ;">:◘:</span></a> contact  </h3> 
+{% endblock %}
+
+
+{% block title_name %}
+    <h4 class="mb-4" style="font-weight:bold ;">Edit contact</h4> 
+{% endblock %}
+
+
+{% block left %}
+	<form action="." class="signin-form" method="POST"> {% csrf_token %}
+		{% for field in form %}
+            <div class="form-group mb-3">
+                <label class="label" for="{{ field.name }}">{{ field.label }}</label>
+                <input type="text" name="{{ field.name }}" class="form-control" placeholder="{{ field.name }}" 
+                {%if field.required %} required {% endif %} {% if field.value %} value="{{ field.value }}"{%endif%}>
+
+            </div>
+        {% endfor %}
+        <br>
+        <button type="submit" class="form-control btn btn-primary submit px-3">Update</button>
+	</form>
+{% endblock %}
+
+{% block right %}
+
+<h5 class="mb-4" style="color:#fff"> You are edditing " {{ obj.name }} "</h5>
+
+<hr>
+<h3 class="mb-4" style="font-weight:bold ;">
+    ○○• <span style="color:#000">:◘:</span>   •○○
+    
+</h3> <hr>
+
+
+<a href="/contacts/" class="btn btn-white btn-outline-white"> back to home page</a>
+
+
+    
+{% endblock %}

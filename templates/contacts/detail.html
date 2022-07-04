@@ -1,0 +1,33 @@
+{{% extends 'base.html' %}
+
+{% block main %}
+    
+    
+{% endblock %}
+
+
+{% block left %}
+    <div class="w-100">
+        <h4 style="font-weight:bold">Number I</h4>
+        <h6> {{ obj.number1 }}</h6> <hr>
+
+        <h4 style="font-weight:bold">Number II</h4>
+        <h6> {{ obj.number2|default:'---' }}</h6> <hr>
+            
+        <h4 style="font-weight:bold">E-mail</h4>
+        <h6> {{ obj.email|default:'---' }}</h6>
+
+    </div>
+    
+{% endblock %}}
+
+{% block right %}
+    <h1 style="font-weight:bold">:◘◘◘:<br>{{ obj.name }} <br>:◘◘◘:</h1>
+    <hr>
+    <p style="font-size:20px">
+        <a href="delete/" class="btn btn-white btn-outline-white">Delete</a> :◘◘◘:
+        <a href="update/" class="btn btn-white btn-outline-white">Update</a> <hr>
+        <a href="/contacts/" class="btn btn-white btn-outline-white">Back to HOME</a>
+    </p>
+    
+{% endblock %}

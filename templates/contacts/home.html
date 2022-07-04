@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1 class="heading-section" style="font-weight:bold; font-size: 35px;">  ph<span style="color:crimson">◘</span>ne 
+    <a href='/contacts/'><span style="color:crimson ;">:◘:</span></a>
+     b<span style="color:crimson">◘◘</span>k  </h1>
+     <hr>
+
+    <p style="font-size:18px ;">You are logged in as <span style="color:crimson">" {{ user }} "</span>, Do you want to 
+        <a href="/logout/" style="font-weight:bold">Logout !?!</a></p> 
+    
+{% endblock %}
+
+
+{% block title_name %}
+    <h4 class="mb-4" style="font-weight:bold ;">Add contact</h4> 
+{% endblock %}
+
+
+{% block left %}
+	<form action="." class="signin-form" method="POST"> {% csrf_token %}
+       
+		<div class="form-group mb-3">
+			<label class="label" for="name">Name</label>
+			<input type="text" name="name" class="form-control" placeholder="name" required>
+		</div>
+    <div class="form-group mb-3">
+        <label class="label" for="number1">Number I</label>
+        <input type="text" name="number1" class="form-control" placeholder="Number I" required>
+    </div>
+    <div class="form-group mb-3">
+            <label class="label" for="number2">Number II</label>
+            <input type="text" name="number2" class="form-control" placeholder="Number II">
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="label" for="email">Email</label>
+        <input type="text" name="email" class="form-control" placeholder="Email">
+    </div>
+    <br>
+	<div class="form-group">
+	<button type="submit" class="form-control btn btn-primary submit px-3">Add Contact</button>
+	</div>
+	<div class="form-group d-md-flex">
+	
+	</form>
+{% endblock %}
+
+{% block right %}
+   
+<h3 class="mb-4" style="font-weight:bold ;">
+    <a href="/search/" class="btn btn-white btn-outline-white" 
+    style="font-weight:bold;width: 100%;border-width: 3px;"> Search !</a>
+    <br><hr> 
+    ○○ contacts <span style="color:white ;">:◘:</span> list  ○○
+    
+</h3> <hr>
+
+    
+
+    {% for i in list %}
+        <h5 style="color:#fff ;">{{ i.name }} ---◘---
+            <a href="{{ i.id }}/" class="btn btn-white btn-outline-white"> Show </a>  
+        </h5>
+        
+        <hr>
+    {% endfor %}
+    
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h3 class="mb-4" style="font-weight:bold ;">search
+    <a href='/contacts/'><span style="color:crimson ;">:◘:</span></a> contacts  </h3> 
+{% endblock %}
+
+
+{% block left %}
+	<form action="." class="signin-form">
+		<input type="text" name="q" placeholder="Search contact name or number ..."
+        style="border-color: crimson ;border-radius: 35px;padding: 10px; width: 100%;border-width: 3px;">
+        <hr>
+        <button type="submit" class="form-control btn btn-primary submit px-3">Search ! </button>
+    </form>
+    <hr>
+    <p style="font-size:18px ;"> Do you want to back to
+        <a href="/contacts/" style="font-weight:bold">HOME ?!</a></p> 
+    
+{% endblock %}
+
+{% block right %}
+   
+    {% for i in obj_list %}
+        <h5 style="color:#fff ;">{{ i.name }} ---◘---
+            <a href="/contacts/{{ i.id }}/" class="btn btn-white btn-outline-white"> Show </a>  
+        </h5>
+        
+        <hr>
+    {% endfor %}
+    
+{% endblock %}
