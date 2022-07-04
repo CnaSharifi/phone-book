@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-hello W world !
-=======
-branch testing !
->>>>>>> search
