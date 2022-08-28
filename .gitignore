@@ -1,5 +1,5 @@
-README.txt
 db.sqlite3
+manage.py
 /my_env/*
 /share/*
 /.vscode/*
