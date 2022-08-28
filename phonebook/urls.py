@@ -18,7 +18,7 @@ from django.urls import path, include
 
 
 from accounts.views import login_view, register_view, logout_view
-from contacts.views import (home_view, search_view, detail_view, delete_view, update_view, test_view ,
+from contacts.views import (home_view, search_view, detail_view, delete_view, update_view,
                             home_viewww , update_viewww, delete_viewww, detail_viewww, search_viewww)
 
 urlpatterns = [
@@ -37,14 +37,14 @@ urlpatterns = [
     # path('contacts/<int:id>/update/',update_view),
 
     path('contacts/',home_viewww.as_view()),
-    path('contacts/<int:pk>/update/',update_viewww.as_view()),
+    path('contacts/<slug:slug>/update/',update_viewww.as_view()),
     path('search/',search_viewww.as_view()),
-    path('contacts/<int:pk>/',detail_viewww.as_view()),
-    path('contacts/<int:pk>/delete/',delete_viewww.as_view()),
+    path('contacts/<slug:slug>/',detail_viewww.as_view(), name='detail-view'),
+    path('contacts/<slug:slug>/delete/',delete_viewww.as_view()),
 
 
 
-    path('test/<int:num>/',test_view),
+    #path('test/<int:num>/',test_view),
     path('__debug__/', include('debug_toolbar.urls')),
     path('admin/', admin.site.urls),
     

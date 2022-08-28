@@ -22,10 +22,12 @@
 {% endblock %}
 
 {% block right %}
-    <h1 style="font-weight:bold">:◘◘◘:<br>{{ obj.name }} <br>:◘◘◘:</h1>
+    <h1 style="font-weight:bold"><span style=color:rgb(200,200,200);>:◘◘◘:</span>
+        <br>{{ obj.name }} <br>
+        <span style=color:rgb(200,200,200);>:◘◘◘:</span>
     <hr>
     <p style="font-size:20px">
-        <a href="delete/" class="btn btn-white btn-outline-white">Delete</a> :◘◘◘:
+        <a href="delete/" class="btn btn-white btn-outline-white">Delete</a> 
         <a href="update/" class="btn btn-white btn-outline-white">Update</a> <hr>
         <a href="/contacts/" class="btn btn-white btn-outline-white">Back to HOME</a>
     </p>

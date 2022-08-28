@@ -1,5 +1,4 @@
 
-from urllib import request
 from django.shortcuts import render, redirect
 
 from .models import ContactModel
@@ -12,7 +11,8 @@ from django.contrib.auth.decorators import login_required
 
 from django.utils import timezone
 
-import time
+
+from django.urls import reverse
 
 import random
 
@@ -31,7 +31,7 @@ class home_viewww(CreateView,ListView):
     model = ContactModel
     template_name = 'contacts/home.html'
     context_object_name = 'list'
-    paginate_by = 10000
+    #paginate_by = 10000
 
     form_class = ContactForm
     success_url = '/contacts/'
@@ -68,13 +68,18 @@ class update_viewww(UpdateView):
     model = ContactModel
     template_name = 'contacts/update.html'
     form_class = ContactForm
-    success_url = '/contacts/'
+    #success_url = '/contacts/'
     context_object_name = 'obj'
+
+    def get_success_url(self):
+        return reverse("detail-view", kwargs={"slug": self.object.slug})  
 
 class detail_viewww(DetailView):
     model = ContactModel
     template_name = 'contacts/detail.html'
     context_object_name = 'obj'
+
+    
 
 
 class search_viewww(ListView):
@@ -137,16 +142,16 @@ def search_view(request):
     return render(request,'contacts/search.html',context)
 
 @login_required(login_url='/')
-def detail_view(request,id):
-    obj = ContactModel.objects.get(id=id)
+def detail_view(request,slug):
+    obj = ContactModel.objects.get(slug=slug)
     context = {'obj':obj}
     return render(request,'contacts/detail.html',context)
 
 
 
 @login_required(login_url='/')
-def delete_view(request,id):
-    obj = ContactModel.objects.get(id=id)
+def delete_view(request,slug):
+    obj = ContactModel.objects.get(slug=slug)
     if request.method == 'POST':
         obj.delete()
         return redirect('/contacts/')
@@ -156,8 +161,8 @@ def delete_view(request,id):
 
 
 @login_required(login_url='/')
-def update_view(request,id):
-    obj = ContactModel.objects.get(id=id)
+def update_view(request,slug):
+    obj = ContactModel.objects.get(slug=slug)
     if request.method == 'GET':
         form = ContactForm(instance=obj)
     else:
@@ -166,7 +171,7 @@ def update_view(request,id):
             #print(form.cleaned_data)
             form.save()
 
-            return redirect(f'/contacts/{id}/')
+            return redirect(f'/contacts/{slug}/')
     context = {
     'form':form ,
     'obj': obj
@@ -174,22 +179,22 @@ def update_view(request,id):
     return render(request,'contacts/update.html',context)
 
 
-def test_view(request,num):
-    from django.contrib.auth import login
-    from django.contrib.auth.models import User
+# def test_view(request,num):
+#     from django.contrib.auth import login
+#     from django.contrib.auth.models import User
 
-    #st = time.time()
+#     #st = time.time()
 
-    user = User.objects.get(id=1)
-    login(request,user)
-    for i in range(num):
-            #User.objects.create_user(username=get_random_string(), email='', password='123')
-            ContactModel.objects.create(name=get_random_string(8),number1=f'913{random.randint(111111,999999)}',user=request.user)
+#     user = User.objects.get(id=1)
+#     login(request,user)
+#     for i in range(num):
+#             #User.objects.create_user(username=get_random_string(), email='', password='123')
+#             ContactModel.objects.create(name=get_random_string(8),number1=f'913{random.randint(111111,999999)}',user=request.user)
 
     
-    contacts_list = ContactModel.objects.filter(user = request.user)
-    context = {'list':contacts_list}
+#     contacts_list = ContactModel.objects.filter(user = request.user)
+#     context = {'list':contacts_list}
 
-    #et = time.time()
-    #print(et-st)
-    return render(request,'contacts/home.html',context)
+#     #et = time.time()
+#     #print(et-st)
+#     return render(request,'contacts/home.html',context)
