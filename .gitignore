@@ -1,5 +1,6 @@
 db.sqlite3
 manage.py
+.gitignore
 /my_env/*
 /share/*
 /.vscode/*
