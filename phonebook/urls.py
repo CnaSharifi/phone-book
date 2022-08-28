@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.contrib.auth.decorators import login_required
+
 
 from accounts.views import login_view, register_view, logout_view
 from contacts.views import (home_view, search_view, detail_view, delete_view, update_view,
@@ -36,11 +38,11 @@ urlpatterns = [
     # path('contacts/<int:id>/delete/',delete_view),
     # path('contacts/<int:id>/update/',update_view),
 
-    path('contacts/',home_viewww.as_view()),
-    path('contacts/<slug:slug>/update/',update_viewww.as_view()),
-    path('search/',search_viewww.as_view()),
-    path('contacts/<slug:slug>/',detail_viewww.as_view(), name='detail-view'),
-    path('contacts/<slug:slug>/delete/',delete_viewww.as_view()),
+    path('contacts/', login_required(home_viewww.as_view())),
+    path('contacts/<slug:slug>/update/', login_required(update_viewww.as_view())),
+    path('search/', login_required(search_viewww.as_view())),
+    path('contacts/<slug:slug>/', login_required(detail_viewww.as_view()), name='detail-view'),
+    path('contacts/<slug:slug>/delete/', login_required(delete_viewww.as_view())),
 
 
 
