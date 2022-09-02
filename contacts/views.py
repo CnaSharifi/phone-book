@@ -179,22 +179,11 @@ def update_view(request,slug):
     return render(request,'contacts/update.html',context)
 
 
-# def test_view(request,num):
-#     from django.contrib.auth import login
-#     from django.contrib.auth.models import User
+def test_view(request):
+    import redis
+    r = redis.Redis(host='localhost', port=6379, db=0)
+    res = r.get('name').decode()
+    print(res)
 
-#     #st = time.time()
 
-#     user = User.objects.get(id=1)
-#     login(request,user)
-#     for i in range(num):
-#             #User.objects.create_user(username=get_random_string(), email='', password='123')
-#             ContactModel.objects.create(name=get_random_string(8),number1=f'913{random.randint(111111,999999)}',user=request.user)
-
-    
-#     contacts_list = ContactModel.objects.filter(user = request.user)
-#     context = {'list':contacts_list}
-
-#     #et = time.time()
-#     #print(et-st)
-#     return render(request,'contacts/home.html',context)
+    return render(request,'contacts/home.html')

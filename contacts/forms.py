@@ -2,6 +2,8 @@ from django.forms import ModelForm
 
 from .models import ContactModel
 
+from .utils import is_valid_mobile
+
 class ContactForm(ModelForm):
     class Meta:
         model = ContactModel
@@ -23,17 +25,17 @@ class ContactForm(ModelForm):
         if qs.exists():
             self.add_error('name','this name already exists ! ')
 
-        
         number1 = cleaned_data.get('number1')
 
-        #print(number1)
-        if number1.startswith('913'):
+        is_valid = is_valid_mobile(number1)
+        if is_valid:
             pass
         else:
-            self.add_error('number1','phone number should start with 913 !!!')
-      
-        
+            self.add_error('number1','This is not a valid iran phone number! ')
+    
         return cleaned_data
+
+
     
 
     

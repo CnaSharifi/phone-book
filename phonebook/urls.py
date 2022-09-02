@@ -20,7 +20,7 @@ from django.contrib.auth.decorators import login_required
 
 
 from accounts.views import login_view, register_view, logout_view
-from contacts.views import (home_view, search_view, detail_view, delete_view, update_view,
+from contacts.views import (home_view, search_view, detail_view, delete_view, update_view,test_view,
                             home_viewww , update_viewww, delete_viewww, detail_viewww, search_viewww)
 
 urlpatterns = [
@@ -46,7 +46,7 @@ urlpatterns = [
 
 
 
-    #path('test/<int:num>/',test_view),
+    path('test/',test_view),
     path('__debug__/', include('debug_toolbar.urls')),
     path('admin/', admin.site.urls),
     
