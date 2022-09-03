@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
+
 from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -91,14 +93,14 @@ WSGI_APPLICATION = 'phonebook.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME':'postgres',
-        # 'USER':'postgres',
-        # 'PASSWORD':'12123',
-        # 'HOST':'127.0.0.1',
-        # 'PORT':'5432',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DATABASE-NAME', 'postgres'),
+        'USER': os.environ.get('DATABASE-USER', 'postgres'),
+        'PASSWORD': os.environ.get('DATABASE-PASSWORD', 'postgres'),
+        'HOST': os.environ.get('DATABASE-HOST', 'database'),
+        'PORT': os.environ.get('DATABASE-PORT', 5432),
     }
 }
 
@@ -140,7 +142,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
+STATIC_ROOT = BASE_DIR / 'static'
+MEDIA_ROOT = BASE_DIR / 'meida'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

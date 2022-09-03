@@ -27,9 +27,9 @@ def slugify_contact_name(instance, new_slug = None):
 def is_valid_mobile(mobile_string):
     mobile_regex = "^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$"
     if(re.search(mobile_regex, mobile_string)):
-        print('true')
+        #print('valid number?','true')
         return True
         
-    print('false')
+    #print('valid number?','false')
     return False
     
